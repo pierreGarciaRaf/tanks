@@ -6,6 +6,21 @@ onready var bulletRes = preload("res://src/world/player/bullet.tscn")
 var timerFinished = true
 onready var parent = get_parent().get_parent().get_parent()
 
+var numberOfParticleSystems = 4
+
+func _ready():
+	
+	for i in range(numberOfParticleSystems-1):
+		var toAdd = $muzzleFire0.duplicate()
+		self.add_child(toAdd)
+		toAdd.name = "muzzleFire" + str(i+1)
+		toAdd = ($muzzleSmoke0.duplicate())
+		toAdd.name = "muzzleSmoke" + str(i+1)
+		self.add_child(toAdd)
+	
+
+
+
 func _physics_process(delta):
 	if Gamestate.player_info.net_id == 1:
 		var shotInput = Gamestate.get_my_input(parent.id).mouse_click
@@ -23,33 +38,19 @@ remote func shoot():
 	toAdd.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	timerFinished = false
-	$Tween.interpolate_property($closeMf, "light_energy",16,0,0.5,Tween.TRANS_CUBIC)
+	$Tween.interpolate_property($closeMf, "light_energy",32,0,0.5,Tween.TRANS_CUBIC)
 	$Tween.start()
-	$Tween.interpolate_property($farMf, "light_energy",8,0,0.2,Tween.TRANS_CUBIC)
+	$Tween.interpolate_property($farMf, "light_energy",16,0,0.2,Tween.TRANS_CUBIC)
 	$Tween.start()
 	particleEmit("muzzleFire")
 	particleEmit("muzzleSmoke")
 	$Timer.start(1.0)
 
-
+var particleIdx = 0
 func particleEmit(emitterStr):
-	var i = 0
-	while(self.has_node(emitterStr+str(i))):
-		i+=1
-	i-=1
-	if self.get_node(emitterStr+str(i)).emitting:
-		print("emitting")
-		i+=1
-		var toAdd = get_node(emitterStr+str(0)).duplicate()
-		toAdd.name = emitterStr + str(i)
-		self.add_child(toAdd)
-		toAdd.emitting = true
-	else:
-		print("not emitting")
-		get_node(emitterStr+str(i)).emitting = true
-	
-	
-	
+	get_node(emitterStr + str(particleIdx)).emitting = true
+	particleIdx = (particleIdx + 1 )%numberOfParticleSystems
+
 
 
 func _on_Timer_timeout():

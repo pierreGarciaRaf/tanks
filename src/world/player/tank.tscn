@@ -11,19 +11,19 @@
 
 [sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=2]
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="CylinderMesh" id=3]
+[sub_resource type="CylinderMesh" id=4]
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 1 ), 0.0, -1.31484, 0, 0, Vector2( 1, 0 ), -0.0315915, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=7]
 flag_align_y = true
 direction = Vector3( 0, 1, 0 )
 spread = 90.0
@@ -38,15 +38,15 @@ damping = 46.98
 angle = -720.0
 scale = 5.0
 scale_random = 0.5
-scale_curve = SubResource( 5 )
+scale_curve = SubResource( 6 )
 
-[sub_resource type="QuadMesh" id=9]
+[sub_resource type="QuadMesh" id=8]
 material = ExtResource( 8 )
 
-[sub_resource type="QuadMesh" id=11]
+[sub_resource type="QuadMesh" id=9]
 material = ExtResource( 6 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 1, 1, 2 )
 
 [node name="Player" type="KinematicBody" groups=[
@@ -68,7 +68,7 @@ size = 99.7
 [node name="MeshInstance" type="MeshInstance" parent="body"]
 transform = Transform( 0.303926, 0, 0, 0, 0.558775, 0, 0, 0, 1.95088, 0.798851, -0.407052, 0 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 10 )
+material/0 = SubResource( 2 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="body"]
 transform = Transform( 0.303926, 0, 0, 0, 0.558775, 0, 0, 0, 1.95088, -0.924343, -0.407052, 0 )
@@ -77,7 +77,7 @@ material/0 = null
 
 [node name="carosserie" type="MeshInstance" parent="body"]
 transform = Transform( 0.739766, 0, 0, 0, -2.58323e-08, 0.590973, 0, -1.42062, -6.20974e-08, 0, 0.28902, 0.376734 )
-mesh = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="textPos" type="Spatial" parent="body"]
@@ -108,7 +108,7 @@ script = ExtResource( 3 )
 
 [node name="barrel" type="MeshInstance" parent="body/barrelPivot"]
 transform = Transform( 0.310965, 0, 0, 0, -1.35927e-08, 0.310965, 0, -2.24841, -9.82809e-08, 0, 0.0457025, -1.28911 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 script = ExtResource( 5 )
 
@@ -144,8 +144,8 @@ explosiveness = 1.0
 fixed_fps = 24
 visibility_aabb = AABB( -4, -0.723593, -4, 8, 0.94621, 8 )
 local_coords = false
-process_material = SubResource( 6 )
-draw_pass_1 = SubResource( 9 )
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
 
 [node name="muzzleSmoke0" type="Particles" parent="body/barrelPivot/barrel"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 7.10543e-15, 1, 0, 1.41071, -3.7287 )
@@ -158,8 +158,8 @@ fixed_fps = 24
 visibility_aabb = AABB( -4, -0.383571, -4, 8, 1.57574, 8 )
 local_coords = false
 process_material = ExtResource( 7 )
-draw_pass_1 = SubResource( 11 )
+draw_pass_1 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 [connection signal="timeout" from="body/barrelPivot/barrel/Timer" to="body/barrelPivot/barrel" method="_on_Timer_timeout"]
