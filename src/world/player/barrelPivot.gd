@@ -1,6 +1,6 @@
 extends Spatial
 
-puppet var master_rotation
+puppet var master_rotation = 1.0
 const ROT_SPEED = 3.0
 
 onready var parent = get_parent().get_parent()

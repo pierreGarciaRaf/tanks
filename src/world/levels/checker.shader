@@ -4,7 +4,6 @@ varying vec3 world_position;
 
 void vertex() {
 	world_position = VERTEX;
-
 }
 
 const float gridSize = 3.5;

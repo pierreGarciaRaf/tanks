@@ -2,7 +2,10 @@ extends Control
 onready var parentID = get_parent().get_parent().get_parent().id
 
 func _ready():
-	get_child(0).text = Network.players[parentID].name +str(parentID)
+	if Network.players.has(parentID):
+		get_child(0).text = Network.players[parentID].name +str(parentID)
+	else:
+		get_child(0).text = "blank"
 
 func set_pos(newPos):
 	self.anchor_left = newPos.x

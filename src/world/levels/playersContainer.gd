@@ -15,6 +15,7 @@ func _ready():
 		self.add_child(toAdd)
 		toAdd.master_translation = playerIdx * Vector3.FORWARD * 5.0
 		toAdd.translation = playerCount * Vector3.FORWARD * 5.0
+		toAdd.connect("dead",self,"set_dead_camera")
 		print(toAdd.translation)
 		playerCount += 1
 	emit_signal("playerSpawned")
@@ -23,3 +24,7 @@ func _ready():
 remote func update_camera():
 	for player in get_children():
 		player.update_camera()
+
+remote func set_dead_camera(id):
+	if id == Gamestate.player_info.net_id:
+		get_parent().get_node("Camera").current = true

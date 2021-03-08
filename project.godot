@@ -24,6 +24,10 @@ config/icon="res://icon.png"
 Gamestate="*res://src/networking/gamestate.gd"
 Network="*res://src/networking/network.gd"
 
+[display]
+
+window/size/always_on_top=true
+
 [input]
 
 move_front={

@@ -28,6 +28,13 @@ func update_server():
 	rpc_id(1, "queue_input", gen_input(), player_info.net_id)
 
 
+func gen_blank_input():
+	var res = {}
+	res["movement"] = Vector3.ZERO
+	res["mouse_position"] = Vector2.ZERO
+	res["mouse_click"] = false
+	return res
+
 func gen_input():
 	var res = {}
 	var move = Vector3.FORWARD * (int(Input.is_action_pressed("move_front")) - int(Input.is_action_pressed("move_back")))
@@ -41,7 +48,10 @@ func get_my_input(net_id):
 	if net_id == 1:
 		return gen_input()
 	else:
-		return inputPlayersQueue[net_id]
+		if inputPlayersQueue.has(net_id):
+			return inputPlayersQueue[net_id]
+		else:
+			return gen_blank_input()
 
 
 

@@ -27,7 +27,28 @@ remote func shoot():
 	$Tween.start()
 	$Tween.interpolate_property($farMf, "light_energy",8,0,0.2,Tween.TRANS_CUBIC)
 	$Tween.start()
+	particleEmit("muzzleFire")
+	particleEmit("muzzleSmoke")
 	$Timer.start(1.0)
+
+
+func particleEmit(emitterStr):
+	var i = 0
+	while(self.has_node(emitterStr+str(i))):
+		i+=1
+	i-=1
+	if self.get_node(emitterStr+str(i)).emitting:
+		print("emitting")
+		i+=1
+		var toAdd = get_node(emitterStr+str(0)).duplicate()
+		toAdd.name = emitterStr + str(i)
+		self.add_child(toAdd)
+		toAdd.emitting = true
+	else:
+		print("not emitting")
+		get_node(emitterStr+str(i)).emitting = true
+	
+	
 	
 
 

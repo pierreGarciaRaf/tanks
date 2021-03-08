@@ -1,6 +1,6 @@
 extends KinematicBody
 
-var id = -1
+export var id = -1
 
 puppet var master_translation
 
@@ -19,6 +19,7 @@ var rotationSpeed = 1.0
 var accSpeed = 2.0
 var deccSpeed = 4.0
 
+signal dead
 
 func _ready():
 	master_translation = self.translation
@@ -64,3 +65,14 @@ func update_camera():
 		$cameraTarget/Camera.current = true
 	else:
 		$cameraTarget/Camera.current = false
+
+
+func deal_damage():
+	if Gamestate.player_info.net_id == 1:
+		print("I'm dead")
+		rpc("destroy")
+		self.destroy()
+
+remote func destroy():
+	emit_signal("dead",id)
+	queue_free()
