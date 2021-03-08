@@ -1,0 +1,192 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UI/mainMenu.gd" type="Script" id=1]
+[ext_resource path="res://src/UI/playerList.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/PlayerName.gd" type="Script" id=3]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NetworkSelectionPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.5
+margin_top = -137.0
+margin_right = 81.5
+margin_bottom = 137.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerName" type="LineEdit" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -59.1629
+margin_top = 29.9706
+margin_right = 64.8371
+margin_bottom = 53.9706
+text = "zoubida"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="NetworkSelectionPanel/PlayerName"]
+
+[node name="port" type="LineEdit" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -65.9142
+margin_top = 170.761
+margin_right = 9.08578
+margin_bottom = 194.761
+text = "4546"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -42.1674
+margin_top = 7.34163
+margin_right = 40.8326
+margin_bottom = 21.3416
+text = "Player name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="serverIP" type="LineEdit" parent="NetworkSelectionPanel"]
+margin_left = 14.0
+margin_top = 137.0
+margin_right = 97.0
+margin_bottom = 161.0
+text = "localhost"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="host" type="Button" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.8408
+margin_top = -30.9317
+margin_right = 19.1592
+margin_bottom = -10.9317
+text = "host"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join" type="Button" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 34.6583
+margin_top = -136.885
+margin_right = 74.6583
+margin_bottom = -116.885
+text = "join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreGameServerPanel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.5
+margin_top = -137.0
+margin_right = 81.5
+margin_bottom = 137.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="PreGameServerPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -42.0842
+margin_top = -28.0229
+margin_right = 44.9158
+margin_bottom = -8.02292
+text = "Start Game!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PreGameServerPanel"]
+margin_left = 21.0
+margin_top = 13.0
+margin_right = 143.0
+margin_bottom = 27.0
+text = "Connected Players:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PreGameServerPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.4977
+margin_top = -105.312
+margin_right = 63.5023
+margin_bottom = 63.6877
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PreGameClientPanel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.5
+margin_top = -137.0
+margin_right = 81.5
+margin_bottom = 137.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PreGameClientPanel"]
+margin_left = 21.0
+margin_top = 13.0
+margin_right = 143.0
+margin_bottom = 27.0
+text = "Connected Players:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PreGameClientPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -59.8326
+margin_top = -106.647
+margin_right = 62.1674
+margin_bottom = 62.3529
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="request_completed" from="NetworkSelectionPanel/PlayerName/HTTPRequest" to="NetworkSelectionPanel/PlayerName" method="_on_HTTPRequest_request_completed"]
+[connection signal="text_changed" from="NetworkSelectionPanel/port" to="." method="_on_port_text_changed"]
+[connection signal="pressed" from="NetworkSelectionPanel/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="NetworkSelectionPanel/join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="PreGameServerPanel/Start" to="." method="_on_Start_pressed"]

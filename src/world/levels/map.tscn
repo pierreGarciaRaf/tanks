@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/world/levels/checker.shader" type="Shader" id=1]
+[ext_resource path="res://src/world/props/playersContainer.tscn" type="PackedScene" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+
+[sub_resource type="ProceduralSky" id=3]
+sky_energy = 0.57
+ground_bottom_color = Color( 0, 0, 0, 1 )
+ground_horizon_color = Color( 0.309804, 0.27451, 0.243137, 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 3 )
+tonemap_mode = 2
+tonemap_white = 2.0
+ss_reflections_enabled = true
+glow_enabled = true
+
+[node name="world" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598, -0.293794, 23.4824, -5.57764 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+material_override = SubResource( 1 )
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.531294, 0 )
+width = 37.7932
+height = 4.75763
+depth = 1.70997
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.531294, -19.5305 )
+width = 37.7932
+height = 4.75763
+depth = 1.70997
+
+[node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.262442, 0, 0.964948, 0, 1, 0, -0.964948, 0, 0.262442, -8.47588, 1.33627, 4.92587 )
+width = 9.25047
+height = 4.75763
+depth = 1.70997
+
+[node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.262442, 0, 0.964948, 0, 1, 0, -0.964948, 0, 0.262442, -14.0821, 1.33627, 24.7607 )
+width = 19.2528
+height = 4.75763
+depth = 1.70997
+
+[node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+width = 82.7357
+depth = 70.0
+
+[node name="CSGBox6" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 35.8693 )
+width = 82.7357
+height = 10.5694
+depth = 9.41454
+
+[node name="CSGBox7" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 42, -1, -1.13073 )
+width = 82.7357
+height = 10.5694
+depth = 9.41454
+
+[node name="CSGBox8" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.718704, -1, -38.3639 )
+width = 82.7357
+height = 10.5694
+depth = 9.41454
+
+[node name="CSGBox9" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43.6128, -1, -1.58484 )
+width = 82.7357
+height = 10.5694
+depth = 9.41454
+
+[node name="playersContainer" parent="." instance=ExtResource( 2 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.20318, -0.61923, 0.758467, 0, 0.774625, 0.632421, -0.979141, 0.128496, -0.157389, -0.583954, 0, 0 )
+light_color = Color( 1, 0.998167, 0.89, 1 )
+shadow_enabled = true
