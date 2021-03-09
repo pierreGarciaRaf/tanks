@@ -24,6 +24,7 @@ signal dead
 func _ready():
 	master_translation = self.translation
 	print("player added")
+	self.connect("dead",Network,"_on_player_dead")
 
 
 func _physics_process(delta):
@@ -54,8 +55,14 @@ func _physics_process(delta):
 
 
 func update_body():
+	
+	$cameraTarget.rotation = Vector3.ZERO
+	$cameraTarget.rotate(Vector3.RIGHT, -PI/3)
+	$cameraTarget.rotate(Vector3.UP,yaw)
+	
 	$body.rotation = Vector3.ZERO
 	$body.rotate(Vector3.UP, yaw)
+	
 	$CollisionShape.rotation = Vector3.ZERO
 	$CollisionShape.rotate(Vector3.UP, yaw)
 
@@ -69,9 +76,9 @@ func update_camera():
 
 func deal_damage():
 	if Gamestate.player_info.net_id == 1:
-		print("I'm dead")
 		rpc("destroy")
-		self.destroy()
+		destroy()
+
 
 remote func destroy():
 	emit_signal("dead",id)

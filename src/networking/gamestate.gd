@@ -32,7 +32,7 @@ func gen_blank_input():
 	var res = {}
 	res["movement"] = Vector3.ZERO
 	res["mouse_position"] = Vector2.ZERO
-	res["mouse_click"] = false
+	res["mouse_click"] = true
 	return res
 
 func gen_input():

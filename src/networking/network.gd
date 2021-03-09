@@ -173,3 +173,13 @@ func coordinate_camera_currents():
 #	get_node("/root").print_tree_pretty()
 	get_node("/root/world/playersContainer").rpc("update_camera")
 	get_node("/root/world/playersContainer").update_camera()
+
+
+func _on_player_dead(playerId):
+	if playerId == Gamestate.player_info.net_id:
+		print("I'm dead")
+	else:
+		if players.has(playerId):
+			print(players[playerId].name +str(" died."))
+		else:
+			print("blank died.")
