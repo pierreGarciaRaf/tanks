@@ -19,7 +19,7 @@ void vertex() {
 void fragment(){
 	float grad = pow((1.0-1.5*length(UV-vec2(0.5))),3);
 	ALPHA =clamp(opac * grad*texture(noise,UV).x,0.0,1.0);
-	ALBEDO = clamp(0.01 * texture(noise, UV).rgb,vec3(0.0),vec3(1.0));
+	ALBEDO = clamp((scale * 0.01 + (1.0-scale)) * texture(noise, UV).rgb,vec3(0.0),vec3(1.0));
 }"
 
 [resource]
