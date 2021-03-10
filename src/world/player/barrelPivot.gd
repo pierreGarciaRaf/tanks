@@ -15,7 +15,7 @@ var angularVel = 0.0
 func _physics_process(delta):
 	if Gamestate.player_info.net_id == 1:
 		var input = Gamestate.get_my_input(parent.id)
-		var toLookAt = parent.get_node("cameraTarget/Camera").project_frow_view_on_y_plane(input.mouse_position)
+		var toLookAt = parent.get_node("cameraTarget/Camera").project_frow_view_on_y_plane(input.mouse_position, $head/BulletSpawner.translation.y)
 		
 		
 		var oldRot = -(self.rotation.y + get_parent().rotation.y - PI/2)

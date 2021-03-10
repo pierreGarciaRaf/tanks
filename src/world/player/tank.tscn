@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/world/player/tank.gd" type="Script" id=1]
 [ext_resource path="res://src/world/player/tankName.gd" type="Script" id=2]
@@ -12,6 +12,15 @@
 [ext_resource path="res://src/world/player/meshRes/body.glb" type="PackedScene" id=10]
 [ext_resource path="res://src/world/player/meshRes/head.fbx" type="PackedScene" id=11]
 [ext_resource path="res://src/world/player/meshRes/barrel.fbx" type="PackedScene" id=12]
+[ext_resource path="res://src/world/player/aim.shader" type="Shader" id=13]
+[ext_resource path="res://src/world/player/BulletSpawner.gd" type="Script" id=14]
+
+[sub_resource type="QuadMesh" id=7]
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 13 )
+shader_param/color = Color( 1, 0.984314, 0, 1 )
+shader_param/divider = 6.309
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, -1.31484, 0, 0, Vector2( 1, 0 ), -0.0315915, 0.0, 0, 0 ]
@@ -96,6 +105,20 @@ wait_time = 0.1
 
 [node name="BulletSpawner" type="Spatial" parent="body/headPivot/head"]
 transform = Transform( -0.310965, 1.96562e-07, 8.59199e-15, 0, -1.35927e-08, 0.310965, 2.71854e-08, 2.24841, 9.82809e-08, 9.3751e-07, 2.54892, 2.81701 )
+script = ExtResource( 14 )
+
+[node name="rcastBase" type="Spatial" parent="body/headPivot/head/BulletSpawner"]
+transform = Transform( 1, 0, 2.03288e-20, 0, 1, -7.10543e-15, -9.52912e-22, 7.10543e-15, 1, -1.40175e-07, -0.110879, 0 )
+
+[node name="rcastShower" type="MeshInstance" parent="body/headPivot/head/BulletSpawner/rcastBase"]
+transform = Transform( 2.629, -2.66685e-06, -1.1044e-14, 1.9167e-07, 1, -3.95701e-08, 8.37818e-15, 3.95701e-08, 1, 6.37724e-07, 0.504445, 0 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="RayCast" type="RayCast" parent="body/headPivot/head/BulletSpawner"]
+transform = Transform( 1, 1.13687e-13, 2.03288e-20, 0, 1, 0, -4.23516e-22, 7.10543e-15, 1, -3.41563e-07, -0.27018, 0 )
+enabled = true
+cast_to = Vector3( 0, 50, 0 )
 
 [node name="closeMf" type="OmniLight" parent="body/headPivot/head"]
 transform = Transform( -1, -4.72094e-20, -8.74228e-08, 0, 1, -5.40012e-13, 8.74228e-08, -5.40012e-13, -1, 9.12459e-07, 2.68974, 2.84823 )

@@ -42,12 +42,14 @@ transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598,
 fov = 97.1
 
 [node name="KinematicBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0024, 1.60524, -7.4648 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8504, 3.44028, -8.69236 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 2.08887, 0, 0, 0, 2.08887, 0, 0, 0, 2.08887, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
+transform = Transform( 2.06162, 0, 0, 0, 2.06162, 0, 0, 0, 2.06162, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
