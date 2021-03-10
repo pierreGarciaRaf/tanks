@@ -23,8 +23,9 @@ remote func remote_queue_free():
 
 
 func _on_bullet_body_entered(body):
-	if body.is_in_group("damageable"):
-		body.deal_damage()
-	if Gamestate.player_info.net_id == 1:
-		self.queue_free()
-		rpc("remote_queue_free")
+	if not body == thrower:
+		if body.is_in_group("damageable") :
+			body.deal_damage()
+		if Gamestate.player_info.net_id == 1:
+			self.queue_free()
+			rpc("remote_queue_free")

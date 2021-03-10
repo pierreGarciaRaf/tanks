@@ -22,12 +22,24 @@ background_sky = SubResource( 4 )
 tonemap_mode = 2
 tonemap_white = 2.0
 ss_reflections_enabled = true
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 3.0
+dof_blur_far_enabled = true
+dof_blur_far_distance = 57.06
+dof_blur_far_amount = 0.05
+dof_blur_far_quality = 0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 25.2
+dof_blur_near_amount = 0.07
+dof_blur_near_quality = 0
 glow_enabled = true
 
 [node name="world" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598, -0.294, 80, -5.578 )
+transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598, -0.294, 40, -5.578 )
+fov = 97.1
 
 [node name="KinematicBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0024, 1.60524, -7.4648 )
@@ -46,25 +58,25 @@ use_collision = true
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.531294, 0 )
 width = 37.7932
-height = 4.75763
+height = 9.2441
 depth = 1.70997
 
 [node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.531294, -19.5305 )
 width = 37.7932
-height = 4.75763
+height = 9.37894
 depth = 1.70997
 
 [node name="CSGBox4" type="CSGBox" parent="CSGCombiner"]
 transform = Transform( 0.262442, 0, 0.964948, 0, 1, 0, -0.964948, 0, 0.262442, -8.47588, 1.33627, 4.92587 )
 width = 9.25047
-height = 4.75763
+height = 9.05724
 depth = 1.70997
 
 [node name="CSGBox5" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 0.262442, 0, 0.964948, 0, 1, 0, -0.964948, 0, 0.262442, -14.0821, 1.33627, 24.7607 )
-width = 19.2528
-height = 4.75763
+transform = Transform( 0.262442, 0, 0.964948, 0, 1, 0, -0.964948, 0, 0.262442, -14.933, 1.33627, 26.4749 )
+width = 11.8697
+height = 10.7019
 depth = 1.70997
 
 [node name="CSGBox3" type="CSGBox" parent="CSGCombiner"]
@@ -73,25 +85,25 @@ width = 82.7357
 depth = 70.0
 
 [node name="CSGBox6" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 35.8693 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93793, 35.8693 )
 width = 82.7357
 height = 10.5694
 depth = 9.41454
 
 [node name="CSGBox7" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 42, -1, -1.13073 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 42, 2.93793, -1.13073 )
 width = 82.7357
 height = 10.5694
 depth = 9.41454
 
 [node name="CSGBox8" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.718704, -1, -38.3639 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.718704, 2.93793, -38.3639 )
 width = 82.7357
 height = 10.5694
 depth = 9.41454
 
 [node name="CSGBox9" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43.6128, -1, -1.58484 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43.6128, 2.93793, -1.58484 )
 width = 82.7357
 height = 10.5694
 depth = 9.41454
@@ -101,6 +113,9 @@ depth = 9.41454
 [node name="Player" parent="playersContainer" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3489, -4.99859, 0.381683 )
 
+[node name="Camera" parent="playersContainer/Player/cameraTarget" index="0"]
+current = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
 
@@ -108,3 +123,5 @@ environment = SubResource( 5 )
 transform = Transform( -0.20318, -0.61923, 0.758467, 0, 0.774625, 0.632421, -0.979141, 0.128496, -0.157389, -0.583954, 0, 0 )
 light_color = Color( 1, 0.998167, 0.89, 1 )
 shadow_enabled = true
+
+[editable path="playersContainer/Player"]

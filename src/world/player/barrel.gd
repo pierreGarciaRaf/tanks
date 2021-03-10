@@ -1,4 +1,4 @@
-extends MeshInstance
+extends Spatial
 
 onready var bulletRes = preload("res://src/world/player/bullet.tscn")
 
@@ -41,6 +41,11 @@ remote func shoot():
 	$Tween.interpolate_property($closeMf, "light_energy",32,0,0.5,Tween.TRANS_CUBIC)
 	$Tween.start()
 	$Tween.interpolate_property($farMf, "light_energy",16,0,0.2,Tween.TRANS_CUBIC)
+	$Tween.start()
+	$Tween.interpolate_property($barrel, "translation",Vector3.FORWARD,Vector3.ZERO,0.5,Tween.TRANS_BOUNCE)
+	$Tween.start()
+	var baseTrans = self.translation
+	$Tween.interpolate_property(self, "translation",baseTrans - 0.5 * Vector3.FORWARD, baseTrans, 1.0,Tween.TRANS_BOUNCE)
 	$Tween.start()
 	particleEmit("muzzleFire")
 	particleEmit("muzzleSmoke")

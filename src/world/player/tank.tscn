@@ -8,22 +8,18 @@
 [ext_resource path="res://src/world/player/muzzle_smoke_shader.tres" type="Material" id=6]
 [ext_resource path="res://src/world/player/muzzle_smoke.tres" type="Material" id=7]
 [ext_resource path="res://src/world/player/muzzle_shader.tres" type="Material" id=8]
+[ext_resource path="res://src/world/player/meshRes/caterpillar.fbx" type="PackedScene" id=9]
+[ext_resource path="res://src/world/player/meshRes/body.glb" type="PackedScene" id=10]
+[ext_resource path="res://src/world/player/meshRes/head.fbx" type="PackedScene" id=11]
+[ext_resource path="res://src/world/player/meshRes/barrel.fbx" type="PackedScene" id=12]
 
-[sub_resource type="CubeMesh" id=1]
-
-[sub_resource type="SpatialMaterial" id=2]
-
-[sub_resource type="CubeMesh" id=3]
-
-[sub_resource type="CylinderMesh" id=4]
-
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, -1.31484, 0, 0, Vector2( 1, 0 ), -0.0315915, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_align_y = true
 direction = Vector3( 0, 1, 0 )
 spread = 90.0
@@ -38,16 +34,16 @@ damping = 46.98
 angle = -720.0
 scale = 5.0
 scale_random = 0.5
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 2 )
 
-[sub_resource type="QuadMesh" id=8]
+[sub_resource type="QuadMesh" id=4]
 material = ExtResource( 8 )
 
-[sub_resource type="QuadMesh" id=9]
+[sub_resource type="QuadMesh" id=5]
 material = ExtResource( 6 )
 
-[sub_resource type="BoxShape" id=10]
-extents = Vector3( 1, 1, 2 )
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 2.86381, 2.01919, 3.50872 )
 
 [node name="Player" type="KinematicBody" groups=[
 "damageable",
@@ -64,21 +60,6 @@ fov = 74.2
 size = 99.7
 
 [node name="body" type="Spatial" parent="."]
-
-[node name="MeshInstance" type="MeshInstance" parent="body"]
-transform = Transform( 0.303926, 0, 0, 0, 0.558775, 0, 0, 0, 1.95088, 0.798851, -0.407052, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
-
-[node name="MeshInstance2" type="MeshInstance" parent="body"]
-transform = Transform( 0.303926, 0, 0, 0, 0.558775, 0, 0, 0, 1.95088, -0.924343, -0.407052, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="carosserie" type="MeshInstance" parent="body"]
-transform = Transform( 0.739766, 0, 0, 0, -2.58323e-08, 0.590973, 0, -1.42062, -6.20974e-08, 0, 0.28902, 0.376734 )
-mesh = SubResource( 3 )
-material/0 = null
 
 [node name="textPos" type="Spatial" parent="body"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.39463, 2.28701 )
@@ -102,53 +83,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="barrelPivot" type="Spatial" parent="body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23269, 0.930767 )
+[node name="headPivot" type="Spatial" parent="body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.08328 )
 script = ExtResource( 3 )
 
-[node name="barrel" type="MeshInstance" parent="body/barrelPivot"]
-transform = Transform( 0.310965, 0, 0, 0, -1.35927e-08, 0.310965, 0, -2.24841, -9.82809e-08, 0, 0.0457025, -1.28911 )
-mesh = SubResource( 4 )
-material/0 = null
+[node name="head" parent="body/headPivot" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1.14553 )
 script = ExtResource( 5 )
 
-[node name="Timer" type="Timer" parent="body/barrelPivot/barrel"]
+[node name="Timer" type="Timer" parent="body/headPivot/head"]
 wait_time = 0.1
 
-[node name="BulletSpawner" type="Spatial" parent="body/barrelPivot/barrel"]
-transform = Transform( 1, 0, 0, 0, 1, -7.10543e-15, 0, 0, 1, 0, 1.35878, 0 )
+[node name="BulletSpawner" type="Spatial" parent="body/headPivot/head"]
+transform = Transform( -0.310965, 1.96562e-07, 8.59199e-15, 0, -1.35927e-08, 0.310965, 2.71854e-08, 2.24841, 9.82809e-08, 9.3751e-07, 2.54892, 2.81701 )
 
-[node name="closeMf" type="OmniLight" parent="body/barrelPivot/barrel"]
-transform = Transform( 3.2158, 0, 0, 0, -1.40567e-07, -0.444759, 0, 3.2158, -1.94417e-08, 0, 1.302, 0 )
+[node name="closeMf" type="OmniLight" parent="body/headPivot/head"]
+transform = Transform( -1, -4.72094e-20, -8.74228e-08, 0, 1, -5.40012e-13, 8.74228e-08, -5.40012e-13, -1, 9.12459e-07, 2.68974, 2.84823 )
 light_color = Color( 1, 0.968627, 0.858824, 1 )
 light_energy = 0.0
 omni_range = 4.69803
 
-[node name="farMf" type="SpotLight" parent="body/barrelPivot/barrel"]
-transform = Transform( 3.2158, 0, 0, 0, -1.40567e-07, -0.444759, 0, 3.2158, -1.94417e-08, 0, 1.302, 0 )
+[node name="farMf" type="SpotLight" parent="body/headPivot/head"]
+transform = Transform( -1, -4.72094e-20, -8.74228e-08, 0, 1, -5.40012e-13, 8.74228e-08, -5.40012e-13, -1, 8.63019e-07, 2.45197, 3.41376 )
 light_color = Color( 1, 0.803922, 0.341176, 1 )
 light_energy = 0.0
 shadow_enabled = true
 spot_range = 19.9208
 spot_angle = 72.273
 
-[node name="Tween" type="Tween" parent="body/barrelPivot/barrel"]
+[node name="Tween" type="Tween" parent="body/headPivot/head"]
 
-[node name="muzzleFire0" type="Particles" parent="body/barrelPivot/barrel"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 7.10543e-15, 1, 3.06682e-06, 1.04891, 0.196151 )
+[node name="muzzleFire0" type="Particles" parent="body/headPivot/head"]
+transform = Transform( -0.310965, 1.96562e-07, 8.59199e-15, 0, -1.35927e-08, 0.310965, 2.71854e-08, 2.24841, 9.82809e-08, -1.25682e-07, 2.68525, 2.67633 )
 emitting = false
 amount = 50
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 24
-visibility_aabb = AABB( -4, -0.723593, -4, 8, 0.94621, 8 )
+visibility_aabb = AABB( -4, -0.856106, -4, 8, 1.21124, 8 )
 local_coords = false
-process_material = SubResource( 7 )
-draw_pass_1 = SubResource( 8 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
 
-[node name="muzzleSmoke0" type="Particles" parent="body/barrelPivot/barrel"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 7.10543e-15, 1, 0, 1.41071, -3.7287 )
+[node name="muzzleSmoke0" type="Particles" parent="body/headPivot/head"]
+transform = Transform( -0.310965, 1.96562e-07, 8.59199e-15, 0, -1.35927e-08, 0.310965, 2.71854e-08, 2.24841, 9.82809e-08, 9.54017e-07, 1.82949, 2.86172 )
 emitting = false
 amount = 50
 one_shot = true
@@ -158,8 +137,17 @@ fixed_fps = 24
 visibility_aabb = AABB( -4, -0.383571, -4, 8, 1.57574, 8 )
 local_coords = false
 process_material = ExtResource( 7 )
-draw_pass_1 = SubResource( 9 )
+draw_pass_1 = SubResource( 5 )
+
+[node name="barrel" parent="body/headPivot/head" instance=ExtResource( 12 )]
+
+[node name="body" parent="body" instance=ExtResource( 10 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="caterpillar" parent="body" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 10 )
-[connection signal="timeout" from="body/barrelPivot/barrel/Timer" to="body/barrelPivot/barrel" method="_on_Timer_timeout"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66397, -0.975793 )
+shape = SubResource( 6 )
+[connection signal="timeout" from="body/headPivot/head/Timer" to="body/headPivot/head" method="_on_Timer_timeout"]
