@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/playerList.gd" type="Script" id=1]
+
+[node name="PreGameClientPanel" type="Panel"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -81.5
+margin_top = -137.0
+margin_right = 81.5
+margin_bottom = 137.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 21.0
+margin_top = 13.0
+margin_right = 143.0
+margin_bottom = 27.0
+text = "Connected Players:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -59.8326
+margin_top = -106.647
+margin_right = 62.1674
+margin_bottom = 62.3529
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

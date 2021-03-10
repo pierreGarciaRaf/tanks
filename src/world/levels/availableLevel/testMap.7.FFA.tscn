@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/world/levels/checker.shader" type="Shader" id=1]
-[ext_resource path="res://src/world/props/playersContainer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/world/player/tank.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/world/props/playersContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/world/levels/checker.shader" type="Shader" id=2]
 
 [sub_resource type="BoxShape" id=1]
 
 [sub_resource type="CubeMesh" id=2]
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 1 )
+shader = ExtResource( 2 )
 
 [sub_resource type="ProceduralSky" id=4]
 sky_energy = 0.57
@@ -25,11 +24,9 @@ ss_reflections_enabled = true
 ssao_enabled = true
 ssao_radius = 2.0
 ssao_intensity = 3.0
-dof_blur_far_enabled = true
 dof_blur_far_distance = 57.06
 dof_blur_far_amount = 0.05
 dof_blur_far_quality = 0
-dof_blur_near_enabled = true
 dof_blur_near_distance = 25.2
 dof_blur_near_amount = 0.07
 dof_blur_near_quality = 0
@@ -42,7 +39,7 @@ transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598,
 fov = 97.1
 
 [node name="KinematicBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8504, 3.44028, -8.69236 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53214, 3.44028, 10.7254 )
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 2.08887, 0, 0, 0, 2.08887, 0, 0, 0, 2.08887, 0, 0, 0 )
@@ -110,13 +107,33 @@ width = 82.7357
 height = 10.5694
 depth = 9.41454
 
-[node name="playersContainer" parent="." instance=ExtResource( 2 )]
+[node name="CSGBox10" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 0.999571, -0.005189, 0.028819, 0, 0.984174, 0.177205, -0.0292825, -0.177129, 0.983752, 32.1749, 1.67642, 0.256195 )
+width = 13.0411
+depth = 64.1423
 
-[node name="Player" parent="playersContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3489, -4.99859, 0.381683 )
+[node name="playersContainer" parent="." instance=ExtResource( 1 )]
 
-[node name="Camera" parent="playersContainer/Player/cameraTarget" index="0"]
-current = true
+[node name="1" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3331, -4.10763, -16.5117 )
+
+[node name="2" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20.602, -3.24595, 28.9605 )
+
+[node name="3" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.4657, -3.77119, 19.1149 )
+
+[node name="4" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.333, -4.7843, -16.6617 )
+
+[node name="5" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.64675, -4.82909, -4.25588 )
+
+[node name="6" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.18712, -4.9602, 26.7935 )
+
+[node name="7" type="Position3D" parent="playersContainer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53767, -4.64579, -20.3611 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
@@ -125,5 +142,3 @@ environment = SubResource( 5 )
 transform = Transform( -0.20318, -0.61923, 0.758467, 0, 0.774625, 0.632421, -0.979141, 0.128496, -0.157389, -0.583954, 0, 0 )
 light_color = Color( 1, 0.998167, 0.89, 1 )
 shadow_enabled = true
-
-[editable path="playersContainer/Player"]

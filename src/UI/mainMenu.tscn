@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/UI/mainMenu.gd" type="Script" id=1]
 [ext_resource path="res://src/UI/playerList.gd" type="Script" id=2]
 [ext_resource path="res://src/UI/PlayerName.gd" type="Script" id=3]
+[ext_resource path="res://src/UI/playerList.tscn" type="PackedScene" id=4]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -151,40 +152,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PreGameClientPanel" type="Panel" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -81.5
-margin_top = -137.0
-margin_right = 81.5
-margin_bottom = 137.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="PreGameClientPanel"]
-margin_left = 21.0
-margin_top = 13.0
-margin_right = 143.0
-margin_bottom = 27.0
-text = "Connected Players:"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PreGameClientPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -59.8326
-margin_top = -106.647
-margin_right = 62.1674
-margin_bottom = 62.3529
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PreGameClientPanel" parent="." instance=ExtResource( 4 )]
 [connection signal="request_completed" from="NetworkSelectionPanel/PlayerName/HTTPRequest" to="NetworkSelectionPanel/PlayerName" method="_on_HTTPRequest_request_completed"]
 [connection signal="text_changed" from="NetworkSelectionPanel/port" to="." method="_on_port_text_changed"]
 [connection signal="pressed" from="NetworkSelectionPanel/host" to="." method="_on_host_pressed"]

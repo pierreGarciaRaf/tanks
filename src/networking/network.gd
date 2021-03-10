@@ -148,13 +148,21 @@ func update_player(net_id, key, new_value):
 
 
 
-func coordinate_start_game():
-	print("coordinate start game")
-	rpc("start_game")
-	start_game()
+func coordinate_map_selection():
+	rpc("map_selection")
+	map_selection()
 
-remote func start_game():
-	get_tree().change_scene("res://src/world/levels/map.tscn")
+
+remote func map_selection():
+	get_tree().change_scene("res://src/UI/playerLevelSelection.tscn")
+
+func coordinate_start_game(toLoad):
+	rpc("start_game",toLoad)
+	start_game(toLoad)
+
+
+remote func start_game(toLoad):
+	get_tree().change_scene(toLoad)
 
 remote func player_ready(net_id):
 	update_player(net_id, "ready_to_start_game", true)

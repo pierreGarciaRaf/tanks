@@ -4,6 +4,7 @@ extends Control
 
 func _ready():
 	Network.connect("player_list_changed",self, "update_player_list")
+	update_player_list()
 
 func update_player_list():
 	while get_child_count() > 0:

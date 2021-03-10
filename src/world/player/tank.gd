@@ -21,19 +21,22 @@ var deccSpeed = 4.0
 
 signal dead
 
+
 func _ready():
 	master_translation = self.translation
 	print("player added")
 	self.connect("dead",Network,"_on_player_dead")
 
-var xyInput
+
+
+var lastYaw = 0
 func _physics_process(delta):
 	if Gamestate.player_info.net_id != 1:
 		self.translation = master_translation
 	else:
 		var input = Gamestate.get_my_input(id)
 		var movementInput = (input.movement as Vector3)
-		xyInput = (movementInput)
+		var xyInput = (movementInput)
 		velocity += Vector3.DOWN * GRAVITY * delta
 		if abs(xyInput.dot(Vector3.FORWARD)) < 0.3:
 			forwardMomentum -= sign(forwardMomentum) * deccSpeed * delta * min(abs(forwardMomentum),1.0)
@@ -49,27 +52,19 @@ func _physics_process(delta):
 		rset("velocity",self.velocity)
 		rset("master_translation", self.translation)
 		rset("yaw", self.yaw)
-	
 	velocity = self.move_and_slide(velocity, Vector3.UP)
 	update_body()
-
+	lastYaw = yaw
 
 func update_body():
-	
-
-	
 	$body.rotation = Vector3.ZERO
 	$body.rotate(Vector3.UP, yaw)
 	
 	$CollisionShape.rotation = Vector3.ZERO
 	$CollisionShape.rotate(Vector3.UP, yaw)
-	
 	var flatVel = Vector2(velocity.x,velocity.z)
-	if abs(xyInput.x) > 0:
-		$body/caterpillar.translation = abs(xyInput.x) * 0.2*(Vector3.ONE * .5 - Vector3(randf(),randf(),randf()))
-	if flatVel.length() > 0.1:
-		$body/caterpillar.translation = flatVel.length()/SPEED*0.3*(Vector3.ONE * .5 - Vector3(randf(),randf(),randf()))
-		$body/body.translation = flatVel.length()/SPEED*0.1*(Vector3.ONE * .5 - Vector3(randf(),randf(),randf()))
+	$body/caterpillar.translation = max(flatVel.length()/SPEED*0.3, 0.2 if yaw != lastYaw else 0.0)*(Vector3.ONE * .5 - Vector3(randf(),randf(),randf()))
+	$body/body.translation = flatVel.length()/SPEED*0.1*(Vector3.ONE * .5 - Vector3(randf(),randf(),randf()))
 	
 
 func update_camera():

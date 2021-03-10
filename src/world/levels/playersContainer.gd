@@ -1,9 +1,16 @@
 extends Spatial
 
 
+
 signal playerSpawned
+var spawnPoints = []
+
 
 func _ready():
+	for child in get_children():
+		spawnPoints.append(child.translation)
+	while(self.get_child_count()>0):
+		self.remove_child(self.get_child(0))
 	self.connect("playerSpawned", Network, "_player_spawned")
 	print("adding players")
 	var playerCount = 0
@@ -13,8 +20,8 @@ func _ready():
 		toAdd.id = Network.players[playerIdx].net_id
 		toAdd.name = "Player" + str(Network.players[playerIdx].net_id)
 		self.add_child(toAdd)
-		toAdd.master_translation = playerIdx * Vector3.FORWARD * 5.0
-		toAdd.translation = playerCount * Vector3.FORWARD * 5.0
+		toAdd.master_translation = spawnPoints[playerCount]
+		toAdd.translation = spawnPoints[playerCount]
 		toAdd.connect("dead",self,"set_dead_camera")
 		print(toAdd.translation)
 		playerCount += 1

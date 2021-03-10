@@ -29,8 +29,8 @@ func _on_join_pressed():
 
 
 func _on_Start_pressed():
-	print("start pressed")
-	Network.coordinate_start_game()
+	Network.coordinate_map_selection()
+	
 
 
 func _on_port_text_changed(new_text):
