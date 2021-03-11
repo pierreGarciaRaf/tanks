@@ -51,6 +51,7 @@ remote func shoot():
 	var baseTrans = self.translation
 	$Tween.interpolate_property(self, "translation",baseTrans - 0.5 * Vector3.FORWARD, baseTrans, 1.0,Tween.TRANS_BOUNCE)
 	$Tween.start()
+	$Tween.interpolate_property(parent, "SPEED",parent.SPEED - speedIncr, parent.SPEED, 1.0, Tween.TRANS_CUBIC)
 	particleEmit("muzzleFire")
 	particleEmit("muzzleSmoke")
 	$Timer.start(1.0)
