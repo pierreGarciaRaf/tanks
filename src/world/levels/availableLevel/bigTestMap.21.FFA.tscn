@@ -3,17 +3,17 @@
 [ext_resource path="res://src/world/props/playersContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/checker.shader" type="Shader" id=2]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 
-[sub_resource type="ProceduralSky" id=4]
+[sub_resource type="ProceduralSky" id=2]
 sky_energy = 0.57
 ground_bottom_color = Color( 0, 0, 0, 1 )
 ground_horizon_color = Color( 0.309804, 0.27451, 0.243137, 1 )
 
-[sub_resource type="Environment" id=5]
+[sub_resource type="Environment" id=3]
 background_mode = 2
-background_sky = SubResource( 4 )
+background_sky = SubResource( 2 )
 tonemap_mode = 2
 tonemap_white = 2.0
 ss_reflections_enabled = true
@@ -35,11 +35,13 @@ transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598,
 fov = 97.1
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
-material_override = SubResource( 3 )
+material_override = SubResource( 1 )
 use_collision = true
 
 [node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.72838, 0 )
 width = 227.993
+height = 5.76239
 depth = 188.72
 
 [node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
@@ -212,7 +214,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.8335, -4.10764, 85.6683 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.8335, -4.10764, 85.6683 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 5 )
+environment = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.20318, -0.61923, 0.758467, 0, 0.774625, 0.632421, -0.979141, 0.128496, -0.157389, -0.583954, 0, 0 )

@@ -27,11 +27,11 @@ func _on_join_pressed():
 	Gamestate.player_info.name = $NetworkSelectionPanel/PlayerName.text
 	Network.join_server($NetworkSelectionPanel/serverIP.text)
 
-
-func _on_Start_pressed():
+func _on_Select_Level_pressed():
 	Network.coordinate_map_selection()
-	
-
 
 func _on_port_text_changed(new_text):
 	Network.server_info.used_port = int(new_text)
+
+
+

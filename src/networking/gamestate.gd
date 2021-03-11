@@ -33,6 +33,15 @@ func gen_blank_input():
 	res["movement"] = Vector3.ZERO
 	res["mouse_position"] = Vector2.ZERO
 	res["mouse_click"] = true
+	res["should_kill_myself"] = false
+	return res
+
+func gen_suicide_input():
+	var res = {}
+	res["movement"] = Vector3.ZERO
+	res["mouse_position"] = Vector2.ZERO
+	res["mouse_click"] = false
+	res["should_kill_myself"] = true
 	return res
 
 func gen_input():
@@ -42,6 +51,7 @@ func gen_input():
 	res["movement"] = move
 	res["mouse_position"] = mousePosition
 	res["mouse_click"] = hasClicked
+	res["should_kill_myself"] = false
 	return res
 
 func get_my_input(net_id):
@@ -50,8 +60,10 @@ func get_my_input(net_id):
 	else:
 		if inputPlayersQueue.has(net_id):
 			return inputPlayersQueue[net_id]
-		else:
+		elif net_id < 0:
 			return gen_blank_input()
+		else:
+			return gen_suicide_input()
 
 
 

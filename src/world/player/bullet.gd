@@ -2,14 +2,14 @@ extends Area
 
 puppet var master_position = null
 
-var speed = 0.5
+var speed = 30.0
 var thrower
 
 
 
 
 func _physics_process(delta):
-	self.translation += self.transform.basis.xform(Vector3.FORWARD * speed)
+	self.translation += self.transform.basis.xform(Vector3.FORWARD * speed) * delta
 	if Gamestate.player_info.net_id == 1:
 		rset("master_position",self.translation)
 	elif master_position != null:

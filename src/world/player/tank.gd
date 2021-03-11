@@ -35,6 +35,9 @@ func _physics_process(delta):
 		self.translation = master_translation
 	else:
 		var input = Gamestate.get_my_input(id)
+		if input.should_kill_myself:
+			rpc("destroy")
+			destroy()
 		var movementInput = (input.movement as Vector3)
 		var xyInput = (movementInput)
 		velocity += Vector3.DOWN * GRAVITY * delta

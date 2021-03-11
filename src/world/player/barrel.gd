@@ -36,6 +36,10 @@ remote func shoot():
 	toAdd.global_transform = $BulletSpawner.global_transform
 	toAdd.scale = Vector3.ONE
 	toAdd.rotate_object_local(Vector3.RIGHT, PI/2)
+	var toDot = get_parent().global_transform.basis.xform(Vector3.FORWARD)
+	var speedIncr = (parent.velocity as Vector3).dot(toDot)
+	toAdd.speed += speedIncr
+	
 	
 	timerFinished = false
 	$Tween.interpolate_property($closeMf, "light_energy",32,0,0.5,Tween.TRANS_CUBIC)

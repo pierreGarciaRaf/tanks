@@ -117,7 +117,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Start" type="Button" parent="PreGameServerPanel"]
+[node name="Select level" type="Button" parent="PreGameServerPanel"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -126,7 +126,7 @@ margin_left = -42.0842
 margin_top = -28.0229
 margin_right = 44.9158
 margin_bottom = -8.02292
-text = "Start Game!"
+text = "Select level"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,4 +157,4 @@ __meta__ = {
 [connection signal="text_changed" from="NetworkSelectionPanel/port" to="." method="_on_port_text_changed"]
 [connection signal="pressed" from="NetworkSelectionPanel/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="NetworkSelectionPanel/join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="PreGameServerPanel/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="PreGameServerPanel/Select level" to="." method="_on_Select_Level_pressed"]

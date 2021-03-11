@@ -107,11 +107,6 @@ width = 82.7357
 height = 10.5694
 depth = 9.41454
 
-[node name="CSGBox10" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( 0.999571, -0.005189, 0.028819, 0, 0.984174, 0.177205, -0.0292825, -0.177129, 0.983752, 32.1749, 1.67642, 0.256195 )
-width = 13.0411
-depth = 64.1423
-
 [node name="playersContainer" parent="." instance=ExtResource( 1 )]
 
 [node name="1" type="Position3D" parent="playersContainer"]
