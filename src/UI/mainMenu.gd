@@ -13,7 +13,6 @@ func _on_started_to_host():
 	$NetworkSelectionPanel.visible = false
 
 func _on_server_joined():
-	
 	$PreGameClientPanel.visible = true
 	$NetworkSelectionPanel.visible = false
 

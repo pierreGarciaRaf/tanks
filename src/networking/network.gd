@@ -19,8 +19,6 @@ var actualNet
 var players = {}
 var onAServer = false
 
-remote var current_pinfo
-
 
 
 func _ready():
@@ -113,17 +111,23 @@ func join_server(ip):
 	print("created client")
 	get_tree().set_network_peer(net)
 	Gamestate.player_info.net_id = net.get_unique_id()
-	
-	print("net.get_unique_id() = ",net.get_unique_id())
 	return true
 
 
 
+remote func changeScene(toWhat):
+	if get_tree().current_scene.filename != toWhat:
+		get_tree().change_scene(toWhat)
+		rpc_id(1, "ready_to_get_welcomed", Gamestate.player_info.net_id)
 
-
+remote func ready_to_get_welcomed(id):
+	print(get_tree().current_scene.name)
+	if get_tree().current_scene.is_in_group("wellcoming"):
+		get_tree().current_scene.update_newcomer(id)
 
 remote func server_coordinate_register_player(pinfo):
 	if Gamestate.player_info.net_id == 1:
+		rpc_id(pinfo.net_id, "changeScene", get_tree().current_scene.filename)
 		for playerIdx in players:
 			rpc_id(pinfo.net_id, "register_player", players[playerIdx])
 		rpc("register_player",pinfo)
@@ -162,7 +166,10 @@ func coordinate_start_game(toLoad):
 
 
 remote func start_game(toLoad):
-	get_tree().change_scene(toLoad)
+	var loadedScene = load(toLoad)
+	get_tree().change_scene_to(loadedScene)
+
+
 
 remote func player_ready(net_id):
 	update_player(net_id, "ready_to_start_game", true)
@@ -178,7 +185,7 @@ func _player_spawned():
 		rpc_id(1,"player_ready",Gamestate.player_info.net_id)
 
 func coordinate_camera_currents():
-#	get_node("/root").print_tree_pretty()
+	get_node("/root").print_tree_pretty()
 	get_node("/root/world/playersContainer").rpc("update_camera")
 	get_node("/root/world/playersContainer").update_camera()
 

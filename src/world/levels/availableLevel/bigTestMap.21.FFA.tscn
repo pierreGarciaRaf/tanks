@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/world/props/playersContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/world/levels/checker.shader" type="Shader" id=2]
+[ext_resource path="res://src/world/levels/ffaLevel.gd" type="Script" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -28,11 +29,27 @@ dof_blur_near_amount = 0.07
 dof_blur_near_quality = 0
 glow_enabled = true
 
-[node name="world" type="Spatial"]
+[node name="world" type="Spatial" groups=[
+"wellcoming",
+]]
+script = ExtResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.0332598, 0.999447, 0, -0.999447, 0.0332598, 0, 84, -1 )
 fov = 97.1
+
+[node name="SpawnButton" type="Button" parent="Camera"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -41.0
+margin_top = -43.0
+margin_right = 41.0
+text = "Spawn"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CSGCombiner" type="CSGCombiner" parent="."]
 material_override = SubResource( 1 )
@@ -220,3 +237,11 @@ environment = SubResource( 3 )
 transform = Transform( -0.20318, -0.61923, 0.758467, 0, 0.774625, 0.632421, -0.979141, 0.128496, -0.157389, -0.583954, 0, 0 )
 light_color = Color( 1, 0.998167, 0.89, 1 )
 shadow_enabled = true
+
+[node name="Label" type="RichTextLabel" parent="."]
+margin_right = 418.0
+margin_bottom = 388.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Camera/SpawnButton" to="." method="_on_SpawnButton_pressed"]

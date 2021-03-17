@@ -25,12 +25,20 @@ func _physics_process(delta):
 	if Gamestate.player_info.net_id == 1:
 		var shotInput = Gamestate.get_my_input(parent.id).mouse_click
 		if shotInput and timerFinished:
-			shoot()
-			rpc("shoot")
+			var name = shoot()
+			rpc("shoot", name)
 
-
-remote func shoot():
+var shootCount = 0
+remote func shoot(name = null):
+	
 	var toAdd = bulletRes.instance()
+	if name != null:
+		toAdd.name = name
+	else:
+		
+		toAdd.name = str(parent.id) + str(shootCount)
+		shootCount += 1
+		shootCount = shootCount%200
 	toAdd.thrower = parent
 	parent.get_parent().add_child(toAdd)
 	toAdd.global_transform = $BulletSpawner.global_transform
@@ -55,6 +63,8 @@ remote func shoot():
 	particleEmit("muzzleFire")
 	particleEmit("muzzleSmoke")
 	$Timer.start(1.0)
+	
+	return toAdd.name
 
 var particleIdx = 0
 func particleEmit(emitterStr):

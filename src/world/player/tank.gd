@@ -71,6 +71,7 @@ func update_body():
 	
 
 func update_camera():
+	$body/textPos/Control/playerName.text += str(id) + "<- id, gmstte id -> "+ str(Gamestate.player_info.net_id)
 	if id == Gamestate.player_info.net_id:
 		$cameraTarget/Camera.current = true
 	else:

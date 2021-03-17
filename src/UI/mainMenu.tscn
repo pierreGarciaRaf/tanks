@@ -70,7 +70,7 @@ margin_left = 14.0
 margin_top = 137.0
 margin_right = 97.0
 margin_bottom = 161.0
-text = "localhost"
+text = "192.168.1.27"
 __meta__ = {
 "_edit_use_anchors_": false
 }

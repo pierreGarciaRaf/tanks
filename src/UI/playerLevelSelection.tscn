@@ -21,7 +21,9 @@ expand_margin_top = 5.0
 expand_margin_bottom = 5.0
 shadow_offset = Vector2( 0.114, 0 )
 
-[node name="levelSelection" type="Control"]
+[node name="levelSelection" type="Control" groups=[
+"wellcoming",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
