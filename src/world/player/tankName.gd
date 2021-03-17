@@ -3,7 +3,7 @@ onready var parentID = get_parent().get_parent().get_parent().id
 
 func _ready():
 	if Network.players.has(parentID):
-		get_child(0).text = Network.players[parentID].name +str(parentID)
+		get_child(0).text = Network.players[parentID].name
 	else:
 		get_child(0).text = "blank"
 

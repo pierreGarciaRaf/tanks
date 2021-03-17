@@ -38,7 +38,7 @@ remote func shoot(name = null):
 		
 		toAdd.name = str(parent.id) + str(shootCount)
 		shootCount += 1
-		shootCount = shootCount%200
+		shootCount = shootCount%999
 	toAdd.thrower = parent
 	parent.get_parent().add_child(toAdd)
 	toAdd.global_transform = $BulletSpawner.global_transform
