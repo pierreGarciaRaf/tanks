@@ -18,9 +18,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -81.5
+margin_left = -129.0
 margin_top = -137.0
-margin_right = 81.5
+margin_right = 81.0
 margin_bottom = 137.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -42,13 +42,13 @@ __meta__ = {
 [node name="HTTPRequest" type="HTTPRequest" parent="NetworkSelectionPanel/PlayerName"]
 
 [node name="port" type="LineEdit" parent="NetworkSelectionPanel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -65.9142
-margin_top = 170.761
-margin_right = 9.08578
-margin_bottom = 194.761
-text = "4546"
+anchor_top = 0.667
+anchor_bottom = 0.667
+margin_left = 39.0858
+margin_top = -11.997
+margin_right = 114.086
+margin_bottom = 12.003
+text = "80"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -66,10 +66,12 @@ __meta__ = {
 }
 
 [node name="serverIP" type="LineEdit" parent="NetworkSelectionPanel"]
+anchor_top = 0.544
+anchor_bottom = 0.544
 margin_left = 14.0
-margin_top = 137.0
-margin_right = 97.0
-margin_bottom = 161.0
+margin_top = -12.056
+margin_right = 129.0
+margin_bottom = 11.944
 text = "192.168.1.27"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -91,12 +93,12 @@ __meta__ = {
 
 [node name="join" type="Button" parent="NetworkSelectionPanel"]
 anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchor_top = 0.537
+anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 34.6583
-margin_top = -136.885
-margin_right = 74.6583
+margin_top = -10.023
+margin_right = -30.3417
 margin_bottom = -116.885
 text = "join"
 __meta__ = {

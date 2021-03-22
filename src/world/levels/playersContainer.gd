@@ -16,14 +16,36 @@ func _ready():
 
 func _process(delta):
 	var toPrint = ""
-	for child in get_children():
-		toPrint += child.name + "\n"
+	for childName in playerNamesSorted:
+		toPrint += childName + "\n"
 	get_node("../Label").text = toPrint
+	if Gamestate.player_info.net_id == 1:
+		sort_players()
+		rpc("sort_players")
+		set_players_speed()
+		rpc("set_players_speed")
+
+var playerNamesSorted = []
+
+remote func sort_players():
+	playerNamesSorted = []
+	for child in get_children():
+		if child.is_in_group("player"):
+			playerNamesSorted.push_back(child.name)
+	playerNamesSorted.sort_custom(self,"_posComparaison")
+
+func _posComparaison(nameA,nameB):
+	return (get_node(nameA) as Spatial).translation.z < get_node(nameB).translation.z
+
+remote func set_players_speed():
+	var i = 0
+	for childName in playerNamesSorted:
+		get_node(childName).SPEED = 10 + (1 - i/float(len(playerNamesSorted))) * 20
+		i += 1
 
 func _setup_players():
 	for playerIdx in Network.players:
 		addPlayer(playerIdx)
-	
 	emit_signal("playerSpawned")
 
 remote func addPlayer(playerIdx):

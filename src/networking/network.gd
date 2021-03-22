@@ -70,8 +70,9 @@ func _on_connection_failed():
 
 # Peer is notified when disconnected from server
 func _on_disconnected_from_server():
-	print("disconnected from server")
-	pass
+	get_tree().set_network_peer(null)
+	get_tree().change_scene("res://src/UI/serverDisconnected.tscn")
+	
 
 
 func _on_started_to_host():
