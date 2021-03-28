@@ -237,11 +237,5 @@ environment = SubResource( 3 )
 transform = Transform( -0.20318, -0.61923, 0.758467, 0, 0.774625, 0.632421, -0.979141, 0.128496, -0.157389, -0.583954, 0, 0 )
 light_color = Color( 1, 0.998167, 0.89, 1 )
 shadow_enabled = true
-
-[node name="Label" type="RichTextLabel" parent="."]
-margin_right = 418.0
-margin_bottom = 388.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+directional_shadow_max_distance = 200.0
 [connection signal="pressed" from="Camera/SpawnButton" to="." method="_on_SpawnButton_pressed"]

@@ -2,8 +2,12 @@ extends Node
 var player_info = {
 	name = "Player",                   # How this player will be shown within the GUI
 	net_id = 1,                        # By default everyone receives "server ID"
-	ready_to_start_game = false
+	ready_to_start_game = false,
+	bonuses = []
 }
+
+enum {speedBoost,turnBoost,bulletSpeedBoost,bulletBounce,bulletSplit}
+
 var inputPlayersQueue = {}
 
 var sensitivity = 2e-3

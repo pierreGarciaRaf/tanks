@@ -61,10 +61,10 @@ extents = Vector3( 2.36239, 2.01919, 2.92473 )
 script = ExtResource( 1 )
 
 [node name="cameraTarget" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.809017, 0.587786, 0, -0.587786, 0.809017, 0, 2.84321, 0 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 2.84321, 0 )
 
 [node name="Camera" parent="cameraTarget" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 2.21145, -3.57628e-06, 38.5601 )
+transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 70 )
 current = false
 fov = 74.2
 size = 99.7

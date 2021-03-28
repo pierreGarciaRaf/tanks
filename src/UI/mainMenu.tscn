@@ -18,9 +18,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -129.0
+margin_left = -143.0
 margin_top = -137.0
-margin_right = 81.0
+margin_right = 143.0
 margin_bottom = 137.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,11 +44,11 @@ __meta__ = {
 [node name="port" type="LineEdit" parent="NetworkSelectionPanel"]
 anchor_top = 0.667
 anchor_bottom = 0.667
-margin_left = 39.0858
-margin_top = -11.997
-margin_right = 114.086
-margin_bottom = 12.003
-text = "80"
+margin_left = 46.0154
+margin_top = -10.7371
+margin_right = 121.016
+margin_bottom = 13.2629
+text = "25565"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -65,13 +65,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label2" type="Label" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -129.732
+margin_top = 135.854
+margin_right = -46.7319
+margin_bottom = 149.854
+text = "IP:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="NetworkSelectionPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -136.032
+margin_top = 179.321
+margin_right = -53.0316
+margin_bottom = 193.321
+text = "Port:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="serverIP" type="LineEdit" parent="NetworkSelectionPanel"]
 anchor_top = 0.544
 anchor_bottom = 0.544
-margin_left = 14.0
-margin_top = -12.056
-margin_right = 129.0
-margin_bottom = 11.944
+margin_left = 47.3879
+margin_top = -14.5758
+margin_right = 162.388
+margin_bottom = 9.42416
 text = "192.168.1.27"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -79,28 +103,27 @@ __meta__ = {
 
 [node name="host" type="Button" parent="NetworkSelectionPanel"]
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -20.8408
-margin_top = -30.9317
-margin_right = 19.1592
-margin_bottom = -10.9317
-text = "host"
+anchor_bottom = 0.5
+margin_left = 30.0
+margin_top = 38.0
+margin_right = 129.0
+margin_bottom = 58.0
+text = "Host a server"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="join" type="Button" parent="NetworkSelectionPanel"]
 anchor_left = 0.5
-anchor_top = 0.537
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 34.6583
-margin_top = -10.023
-margin_right = -30.3417
-margin_bottom = -116.885
-text = "join"
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 31.0
+margin_right = 130.0
+margin_bottom = 20.0
+text = "Join a server"
 __meta__ = {
 "_edit_use_anchors_": false
 }

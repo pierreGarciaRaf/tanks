@@ -11,15 +11,20 @@ puppet var yaw = 0
 
 
 var SPEED = 20.0
+var BOOSTED_SPEED = 25.0
 var JUMP_FORCE = 20.0
 
 
 var forwardMomentum = 0.0
-var rotationSpeed = 1.0
+var ROT_SPEED = 1.0
+var BSTD_ROT_SPEED = 2.5
 var accSpeed = 2.0
 var deccSpeed = 4.0
 
+
+
 signal dead
+
 
 
 func _ready():
@@ -48,16 +53,21 @@ func _physics_process(delta):
 		
 		
 		forwardMomentum = clamp(forwardMomentum,-1,1)
-		yaw -= xyInput.x * rotationSpeed * delta
-		velocity = (SPEED * forwardMomentum * Vector3.FORWARD).rotated(Vector3.UP, yaw) + Vector3.UP * velocity.y
+		var myRotSpeed = BSTD_ROT_SPEED if Network.players[id].bonuses.has(Gamestate.turnBoost) else ROT_SPEED
 		
+		yaw -= xyInput.x * myRotSpeed * delta
+		var mySpeed = BOOSTED_SPEED if Network.players[id].bonuses.has(Gamestate.speedBoost) else SPEED
+		velocity = (mySpeed * forwardMomentum * Vector3.FORWARD).rotated(Vector3.UP, yaw) + Vector3.UP * velocity.y
 		
+		if Input.is_action_just_pressed("ui_accept"):
+			Network.server_coordinate_receive_boost(id,Gamestate.bulletBounce)
 		rset("velocity",self.velocity)
 		rset("master_translation", self.translation)
 		rset("yaw", self.yaw)
 	velocity = self.move_and_slide(velocity, Vector3.UP)
 	update_body()
 	lastYaw = yaw
+
 
 func update_body():
 	$body.rotation = Vector3.ZERO
@@ -86,3 +96,5 @@ func deal_damage():
 remote func destroy():
 	emit_signal("dead",id)
 	queue_free()
+
+

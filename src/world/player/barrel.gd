@@ -8,6 +8,9 @@ onready var parent = get_parent().get_parent().get_parent()
 
 var numberOfParticleSystems = 4
 
+var BOOSTED_BULLET_SPEED = 50.0
+var BULLET_SPEED = 30.0
+
 func _ready():
 	
 	for i in range(numberOfParticleSystems-1):
@@ -46,7 +49,8 @@ remote func shoot(name = null):
 	toAdd.rotate_object_local(Vector3.RIGHT, PI/2)
 	var toDot = get_parent().global_transform.basis.xform(Vector3.FORWARD)
 	var speedIncr = (parent.velocity as Vector3).dot(toDot)
-	toAdd.speed += speedIncr
+	var toAddSpeed = BOOSTED_BULLET_SPEED if Network.players[parent.id].bonuses.has(Gamestate.bulletSpeedBoost) else BULLET_SPEED
+	toAdd.speed = toAddSpeed + speedIncr
 	
 	
 	timerFinished = false

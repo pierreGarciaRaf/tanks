@@ -33,7 +33,6 @@ func _ready():
 # Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
 	print(id)
-	pass
 
 
 
@@ -199,3 +198,20 @@ func _on_player_dead(playerId):
 			print(players[playerId].name +str(" died."))
 		else:
 			print("blank died.")
+
+func server_coordinate_receive_boost(id,toReceive):
+	if receive_boost(id,toReceive):
+		rpc("receive_boost",id,toReceive)
+	print(players)
+
+remote func receive_boost(id,toReceive):
+	if players[id].bonuses.has(toReceive):
+		return false
+	(players[id].bonuses as Array).append(toReceive)
+	return true
+
+
+
+
+
+
